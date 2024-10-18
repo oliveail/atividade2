@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  db:
+    build:
+      dockerfile: Dockerfile.db  
+    container_name: my-mysql
+    restart: always
+    environment:
+      - database=db_web
+      - password=a1b2c3d4
+      - MYSQL_USERNAME=user_db
+    ports:
+      - '3306:3306'
+  web:
+    build:
+      dockerfile: Dockerfile.web  
+    container_name: my-web
+    environment:
+      - MYSQL_USERNAME=user_db
+      - MYSQL_PASSWORD=a1b2c3d4
+      - MYSQL_ADDRESS=db
+      - MYSQL_DBNAME=db_web
+    ports:
+      - '8200:8200'
+    

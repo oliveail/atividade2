@@ -1,0 +1,9 @@
+FROM mysql
+
+ARG database
+ARG password
+
+RUN echo ${database}
+RUN echo ${password}
+
+COPY codigo.sql docker-entrypoint-initdb.d/
